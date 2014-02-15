@@ -2,7 +2,7 @@
     'use strict';
 
     function getViewModel() {
-        return new app.model.todo();
+        return new app.models.todo();
     }
 
 
@@ -59,7 +59,7 @@
     }
 
 
-    app.view.todo = Mortar.view.extend({
+    app.views.todo = Mortar.view.extend({
         fqn: 'js/views/todo',
         model: getViewModel,
         _init: init

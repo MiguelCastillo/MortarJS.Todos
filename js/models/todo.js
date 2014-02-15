@@ -1,7 +1,7 @@
 (function( ) {
     'use strict';
 
-    app.model.todo = Mortar.koModel.extend({
+    app.models.todo = Mortar.koModel.extend({
         data: {
             items: [{
                 "completed": false,
