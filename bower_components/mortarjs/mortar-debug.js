@@ -1554,6 +1554,8 @@ define('src/model',[
 
     // Serialize
     this.serialize(this.data);
+    this._init();
+    this._create();
   }
 
 
@@ -1568,7 +1570,9 @@ define('src/model',[
       dataType: "json"
     },
     bind: $.noop,
-    unbind: $.noop
+    unbind: $.noop,
+    _init: $.noop,
+    _create: $.noop
   }, events, crud);
 
 
