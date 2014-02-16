@@ -1526,7 +1526,7 @@ define('src/model',[
 
   // Delete item from the server
   crud.prototype.remove = function(data, options) {
-    return promise.when.call(this.datasource("delete", data, options)).then(function(data){
+    return promise.when.call(this, this.datasource("delete", data, options)).then(function(data){
       return data;
     });
   };

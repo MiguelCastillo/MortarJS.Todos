@@ -1,6 +1,9 @@
 <header id="header">
     <h1>todos</h1>
-    <input id="new-todo" placeholder="What needs to be done?" autofocus>
+    <!-- wrapping input in a form to more easily capture the enter key to add the new item -->
+    <form action="#" data-bind="submit: add">
+        <input id="new-todo" placeholder="What needs to be done?" data-bind="value: newItem, valueUpdate: 'input'" autofocus>
+    </form>
 </header>
 <!-- This section should be hidden by default and shown when there are todos -->
 <section id="main">
@@ -15,7 +18,12 @@
                 <label data-bind="html: title, event: {dblclick: $root.enableEdit}"></label>
                 <button class="destroy" data-bind="click: $root.remove"></button>
             </div>
-            <input class="edit" value="" data-bind="value: title, hasFocus: editing">
+            <!-- ko if: editing -->
+            <!-- wrapping input in a form to more easily capture the enter key to finish editing -->
+            <form action="#" data-bind="submit: $root.disableEdit">
+                <input class="edit" value="" data-bind="value: title, hasFocus: editing">
+            </form>
+            <!-- /ko -->
         </li>
     </ul>
 </section>
@@ -36,5 +44,5 @@
         </li>
     </ul>
     <!-- Hidden if no completed items are left ↓ -->
-    <button id="clear-completed" data-bind="visible: itemsCompleted().length">Clear completed (<span data-bind="text: itemsCompleted().length"></span>)</button>
+    <button id="clear-completed" data-bind="visible: itemsCompleted().length, click: clearCompleted">Clear completed (<span data-bind="text: itemsCompleted().length"></span>)</button>
 </footer>

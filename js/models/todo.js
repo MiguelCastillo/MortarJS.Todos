@@ -26,6 +26,15 @@
     function expandModel(model) {
         var toggleState = false;
 
+        function newItem(title, state) {
+            return Mortar.koFactory({
+                "completed": state === true,
+                "title": title,
+                "editing": false
+            });
+        }
+
+
         function itemsChecked(status) {
             var items = model.items(),
                 completed = [];
@@ -40,13 +49,19 @@
             return completed;
         }
 
+
         model.itemsActive = ko.computed(function () {
             return itemsChecked( false );
         });
 
+
         model.itemsCompleted = ko.computed(function() {
             return itemsChecked( true );
         });
+
+
+        model.newItem = Mortar.koFactory("");
+
 
         model.toggleItems = function() {
             var items = itemsChecked( toggleState );
@@ -61,14 +76,40 @@
             }
         };
 
+
         model.enableEdit = function() {
-            this.editing( true )
+            this.editing( true );
         };
+
+
+        model.disableEdit = function() {
+            this.editing( false );
+            return false; // Handle form submit
+        };
+
 
         model.remove = function() {
             model.items.remove(this);
         };
-    }
 
+
+        model.add = function() {
+            // add item and clear input
+            model.items.push( newItem( model.newItem(), false ) );
+            model.newItem("");
+            return false; // Handle form submit
+        };
+
+
+        model.clearCompleted = function() {
+            var completedItems = itemsChecked(true);
+            var i, length;
+
+            for ( i = 0, length = completedItems.length; i < length; i++ ) {
+                model.items.remove(completedItems[i]);
+            }
+        };
+
+    }
 
 })( );

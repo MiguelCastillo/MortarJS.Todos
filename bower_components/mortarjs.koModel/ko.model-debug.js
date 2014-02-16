@@ -15,7 +15,7 @@
     define(["Mortar", "ko"], factory);
   } else {
     // Do browser support
-    root.Mortar.koModel = factory(root.Mortar, root.ko);
+    factory(root.Mortar, root.ko);
   }
 }(this, function(Mortar, ko) {
 
@@ -221,6 +221,7 @@ var Binder = (function() {
   return Binder;
 })();
 
-  return Mortar.model.extend(Binder);
-
+  Mortar.koFactory = koFactory;
+  Mortar.koModel   = Mortar.model.extend(Binder);
+  return Mortar.koModel;
 }));
