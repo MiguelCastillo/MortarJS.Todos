@@ -2,18 +2,20 @@
     'use strict';
 
 
+    function read() {
+        return  {
+            items: JSON.parse(localStorage.getItem("todos-mortarjs")) || []
+        };
+    }
+
+
+    function save(data) {
+        localStorage.setItem("todos-mortarjs", JSON.stringify(data));
+    }
+
+
     app.models.todo = Mortar.koModel.extend({
-        data: {
-            items: [{
-                "completed": false,
-                "title": "Item1",
-                "editing": false
-            },{
-                "completed": true,
-                "title": "Item2",
-                "editing": false
-            }]
-        },
+        data: read(),
         _init: init
     });
 
@@ -35,7 +37,7 @@
         }
 
 
-        function itemsChecked(status) {
+        function itemsCompleted(status) {
             var items = model.items(),
                 completed = [];
             var i, length;
@@ -51,20 +53,21 @@
 
 
         model.itemsActive = ko.computed(function () {
-            return itemsChecked( false );
+            return itemsCompleted( false );
         });
 
 
         model.itemsCompleted = ko.computed(function() {
-            return itemsChecked( true );
+            return itemsCompleted( true );
         });
 
 
+        model.editing = Mortar.koFactory(false);
         model.newItem = Mortar.koFactory("");
 
 
         model.toggleItems = function() {
-            var items = itemsChecked( toggleState );
+            var items = itemsCompleted( toggleState );
             var i, length;
 
             // Swap states
@@ -78,7 +81,16 @@
 
 
         model.enableEdit = function() {
-            this.editing( true );
+            model.editing(this);
+            this.editing(true);
+
+            // Create a self destructing subscription to keep track of when
+            // editing is enabled/disabled when double clicking through the
+            // todo items
+            var subsription = this.editing.subscribe(function(value) {
+                model.editing(value);
+                subsription.dispose();
+            });
         };
 
 
@@ -102,13 +114,20 @@
 
 
         model.clearCompleted = function() {
-            var completedItems = itemsChecked(true);
+            var completedItems = itemsCompleted(true);
             var i, length;
 
             for ( i = 0, length = completedItems.length; i < length; i++ ) {
                 model.items.remove(completedItems[i]);
             }
         };
+
+
+        ko.computed(function() {
+            if ( !model.editing() ) {
+                save(Mortar.koFactory.deserialize(model.items));
+            }
+        }).extend({ throttle: 500 });
 
     }
 
