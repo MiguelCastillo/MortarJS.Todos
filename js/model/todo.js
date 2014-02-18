@@ -3,7 +3,7 @@
 
 
     app.model.todo = Mortar.koModel.extend({
-        data: read(),
+        data: read,
         _init: init
     });
 
