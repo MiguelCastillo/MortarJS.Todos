@@ -2,6 +2,18 @@
     'use strict';
 
 
+    app.model.todo = Mortar.koModel.extend({
+        data: read(),
+        _init: init
+    });
+
+
+    function init() {
+        expandModel(this.data);
+        initRoute(this.data);
+    }
+
+
     function initRoute(model) {
         Mortar.hash(":root").on("change", function(evt, value) {
             model.filterMode(value);
@@ -20,17 +32,6 @@
         localStorage.setItem("todos-mortarjs", JSON.stringify(data));
     }
 
-
-    app.model.todo = Mortar.koModel.extend({
-        data: read(),
-        _init: init
-    });
-
-
-    function init() {
-        expandModel(this.data);
-        initRoute(this.data);
-    }
 
 
     function expandModel(model) {
