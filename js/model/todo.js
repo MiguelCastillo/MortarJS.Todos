@@ -2,6 +2,13 @@
     'use strict';
 
 
+    function initRoute(model) {
+        Mortar.hash(":root").on("change", function(evt, value) {
+            model.filterMode(value);
+        });
+    }
+
+
     function read() {
         return  {
             items: JSON.parse(localStorage.getItem("todos-mortarjs")) || []
@@ -22,6 +29,7 @@
 
     function init() {
         expandModel(this.data);
+        initRoute(this.data);
     }
 
 
@@ -32,7 +40,8 @@
             return Mortar.koFactory({
                 "completed": state === true,
                 "title": title,
-                "editing": false
+                "editing": false,
+                "show": true
             });
         }
 
@@ -52,6 +61,13 @@
         }
 
 
+        Mortar.koFactory({
+            editing: false,
+            newItem: "",
+            filterMode: ""
+        }, model);
+
+
         model.itemsActive = ko.computed(function () {
             return itemsCompleted( false );
         });
@@ -62,8 +78,19 @@
         });
 
 
-        model.editing = Mortar.koFactory(false);
-        model.newItem = Mortar.koFactory("");
+        model.filterables = ko.computed(function() {
+            switch( model.filterMode() ){
+                case "completed": {
+                    return itemsCompleted(true);
+                }
+                case "active": {
+                    return itemsCompleted(false);
+                }
+                default: {
+                    return model.items();
+                }
+            }
+        });
 
 
         model.toggleItems = function() {
@@ -128,7 +155,6 @@
                 save(Mortar.koFactory.deserialize(model.items));
             }
         }).extend({ throttle: 500 });
-
     }
 
 })( );
