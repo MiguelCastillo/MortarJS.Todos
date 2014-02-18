@@ -14,7 +14,7 @@
     }
 
 
-    app.models.todo = Mortar.koModel.extend({
+    app.model.todo = Mortar.koModel.extend({
         data: read(),
         _init: init
     });

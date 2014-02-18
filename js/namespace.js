@@ -1,5 +1,5 @@
 var app = app || {};
-app.views  = app.views  || {};
-app.models = app.models || {};
-app.routes = app.routes || {};
-app.tmpls  = app.tmpls  || {};
+app.view  = app.view  || {};
+app.model = app.model || {};
+app.route = app.route || {};
+app.tmpl  = app.tmpl  || {};
