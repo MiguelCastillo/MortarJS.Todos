@@ -41,8 +41,7 @@
             return Mortar.koFactory({
                 "completed": state === true,
                 "title": title,
-                "editing": false,
-                "show": true
+                "editing": false
             });
         }
 
