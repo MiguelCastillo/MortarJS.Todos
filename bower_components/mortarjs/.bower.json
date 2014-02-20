@@ -1,0 +1,39 @@
+{
+  "name": "mortarjs",
+  "homepage": "https://github.com/MiguelCastillo/MortarJS",
+  "authors": [
+    "Miguel Castillo <manchagnu@gmail.com>"
+  ],
+  "description": "MVC framework to facilate crafting Web Application with Data Driven Architecture",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/MiguelCastillo/MortarJS.git"
+  },
+  "main": "dist/mortar.js",
+  "keywords": [
+    "mortar",
+    "mortarjs"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests.html",
+    "tests",
+    "buildinfo",
+    "src",
+    "Gruntfile.js",
+    "notes.txt",
+    "lib"
+  ],
+  "_release": "9df503f2b3",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9df503f2b354daf715a0143e375cdef56232dcc4"
+  },
+  "_source": "git://github.com/MiguelCastillo/MortarJS.git",
+  "_target": "*",
+  "_originalSource": "mortarjs"
+}

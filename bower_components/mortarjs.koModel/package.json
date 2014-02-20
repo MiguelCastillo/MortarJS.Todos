@@ -1,0 +1,30 @@
+{
+  "name": "mortar.komodel",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Miguel Castillo <mahchagnu@gmail.com>",
+  "title": "MortarJS.koModel",
+  "description": "Simply create KnockoutJS ViewModels for MortarJS",
+  "homepage": "https://github.com/MiguelCastillo/MortarJS.koModel",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/MiguelCastillo/MortarJS.koModel.git"
+  },
+  "bugs": {
+    "email": "manchagnu@gmail.com",
+    "url": "https://github.com/MiguelCastillo/MortarJS.koModel/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-requirejs": "~0.4.1"
+  },
+  "main": "dist/mortar.ko.model.js",
+  "keywords": [
+    "ko",
+    "ko js",
+    "knockout js",
+    "knockoutjs",
+    "ko factory",
+    "kofactory"
+  ]
+}
