@@ -4,6 +4,11 @@
 
 > _[MortarJS - https://github.com/MiguelCastillo/MortarJS](link-to-framework)_
 
+## Installation
+``` javascript
+> bower install todomvc-mortarjs
+```
+Or clone the project.
 
 ## Credit
 
