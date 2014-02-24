@@ -2,7 +2,7 @@
 
 > MVC framework to facilate crafting Web Application with Data Driven Architecture.
 
-> _[MortarJS - https://github.com/MiguelCastillo/MortarJS](link-to-framework)_
+> _[MortarJS - https://github.com/MiguelCastillo/MortarJS](https://github.com/MiguelCastillo/MortarJS)_
 
 ## Installation
 ``` javascript
